@@ -11,4 +11,7 @@ I will develop a database schema to store the game matches between players. Use 
     Why This Project?
 Modern data-driven applications require developers that know how to store data and interact programmatically with that data. In this project, you’ll design a database based off of a provided specification and use case and then write code that makes use of that data.
 
-    
+    Using the Vagrant Virtual Machine
+The Vagrant VM has PostgreSQL installed and configured, as well as the psql command line interface (CLI) , so that you don't have to install or configure them on your local machine.
+
+To use the Vagrant virtual machine, navigate to the full-stack-nanodegree-vm/tournament (fork https://github.com/udacity/fullstack-nanodegree-vm) directory in the terminal, then use the command vagrant up (powers on the virtual machine) followed by vagrant ssh (logs into the virtual machine) .
