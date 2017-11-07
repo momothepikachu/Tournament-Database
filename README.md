@@ -12,6 +12,18 @@ I will develop a database schema to store the game matches between players. Use 
 Modern data-driven applications require developers that know how to store data and interact programmatically with that data. In this project, you’ll design a database based off of a provided specification and use case and then write code that makes use of that data.
 
     Using the Vagrant Virtual Machine
-The Vagrant VM has PostgreSQL installed and configured, as well as the psql command line interface (CLI) , so that you don't have to install or configure them on your local machine.
+The Vagrant folder has PostgreSQL installed and configured, as well as the psql command line interface (CLI) , so that you don't have to install or configure them on your local machine.
 
-To use the Vagrant virtual machine, navigate to the full-stack-nanodegree-vm/tournament (fork https://github.com/udacity/fullstack-nanodegree-vm) directory in the terminal, then use the command vagrant up (powers on the virtual machine) followed by vagrant ssh (logs into the virtual machine) .
+    Purposes of each files(in Vagrant/Tournament)
+--tournament.sql - this file is used to set up your database schema (the table
+representation of your data structure).
+
+--tournament.py - this file is used to provide access to your database via a library of
+functions which can add, delete or query data in your database to another python
+program (a client program). Remember that when you define a function, it does not
+execute, it simply means the function is defined to run a specific set of instructions when
+called.
+
+--tournament_test.py - this is a client program which will use your functions written in
+the tournament.py module. We've written this client program to test your implementation
+of functions in tournament.py
