@@ -16,7 +16,7 @@ This project has two parts: defining the database schema (SQL table definitions)
 
 I will develop a database schema to store the game matches between players. Use Python module to rank the players and pair them up in matches in a tournament.
 
-### <a name="Why This Project?"></a>Why This Project?
+### <a name="Why-This-Project?"></a>Why This Project?
 Modern data-driven applications require developers that know how to store data and interact programmatically with that data. In this project, you’ll design a database based off of a provided specification and use case and then write code that makes use of that data.
 
     Using the Vagrant Virtual Machine
