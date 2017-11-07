@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Why This Project?](#Why This Project?)
+- [Why This Project?](#Why-This-Project?)
 - [Code](#code)
 - [Project Instruction](#project-instruction)
 - [Run](#run)
