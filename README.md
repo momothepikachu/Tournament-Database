@@ -14,7 +14,7 @@ Modern data-driven applications require developers that know how to store data a
     Using the Vagrant Virtual Machine
 The Vagrant folder has PostgreSQL installed and configured, as well as the psql command line interface (CLI) , so that you don't have to install or configure them on your local machine.
 
-    Purposes of each files(in Vagrant/Tournament)
+    Purposes of Each Files(in vagrant/tournament)
 --tournament.sql - this file is used to set up your database schema (the table
 representation of your data structure).
 
