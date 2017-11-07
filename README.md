@@ -3,9 +3,8 @@
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Why This Project?](#Why-This-Project?)
-- [Code](#code)
-- [Project Instruction](#project-instruction)
-- [Run](#run)
+- [Using the Vagrant Virtual Machine](#Using-the-Vagrant-Virtual-Machine)
+- [Purposes of Each File](#Purposes-of-Each-File)
 
 ### <a name="project-overview"></a>Project Overview
 In this project, I'll be writing a Python module that uses the PostgreSQL database to keep track of players and matches in a game tournament.
@@ -19,10 +18,10 @@ I will develop a database schema to store the game matches between players. Use 
 ### <a name="Why-This-Project?"></a>Why This Project?
 Modern data-driven applications require developers that know how to store data and interact programmatically with that data. In this project, you’ll design a database based off of a provided specification and use case and then write code that makes use of that data.
 
-    Using the Vagrant Virtual Machine
+### <a name="Using-the-Vagrant-Virtual-Machine"></a>Using the Vagrant Virtual Machine
 The Vagrant folder has PostgreSQL installed and configured, as well as the psql command line interface (CLI) , so that you don't have to install or configure them on your local machine.
 
-    Purposes of Each File(in vagrant/tournament)
+### <a name="Purposes-of-Each-File"></a>Purposes of Each File(in vagrant/tournament)
 --tournament.sql - this file is used to set up your database schema (the table
 representation of your data structure).
 
