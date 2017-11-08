@@ -13,33 +13,14 @@ def connect():
 
 def deleteMatches():
     """Remove all the match records from the database."""
-    conn = connect()
-    c = conn.cursor()
-    c.execute("update players set wins = 0, matches = 0;")
-    c.execute("delete from matches;")
-    conn.commit()
-    conn.close()
 
 
 def deletePlayers():
     """Remove all the player records from the database."""
-    conn = connect()
-    c = conn.cursor()
-    c.execute("delete from players;")
-    c.execute("delete from matches;")
-    conn.commit()
-    conn.close()
+
 
 def countPlayers():
     """Returns the number of players currently registered."""
-    conn = connect()
-    c = conn.cursor()
-    c.execute("select count(*) from players ;")
-    count = c.fetchone()
-    return count[0]
-    conn.commit()
-    conn.close()
-    
 
 
 def registerPlayer(name):
@@ -51,13 +32,7 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
-    conn = connect()
-    c = conn.cursor()
-    c.execute("insert into players (name) values (%s);",(name,))
-    #c.execute("insert into matches (id,wins,matches) values ((select id from players where name = (%s)),0,0)",(name,))
-    conn.commit()
-    conn.close()
-    
+
 
 def playerStandings():
     """Returns a list of the players and their win records, sorted by wins.
@@ -72,12 +47,7 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    conn = connect()
-    c = conn.cursor()
-    c.execute("select id, name, wins, matches from players order by wins;")
-    standings = c.fetchall()
-    return standings
-    conn.close()
+
 
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
@@ -86,13 +56,7 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
-    conn = connect()
-    c = conn.cursor()
-    c.execute("insert into matches (winner,loser) values (%s,%s)",(winner,loser))
-    c.execute("update players set matches = matches +1, wins = wins + 1 where id = (%s);", (winner,))
-    c.execute("update players set matches = matches +1 where id = (%s);", (loser,))
-    conn.commit()
-    conn.close() 
+ 
  
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
@@ -109,18 +73,5 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    standings = playerStandings()
-    info = list()
-    for (a,b,c,d) in standings:
-        info.append((a,b))
-    pairings = list()
-    pairn = len(info)
-    n = 0
-    while n < pairn:
-        pairings.append(info[n]+info[n+1])
-        n = n + 2
-    return pairings
-    #[(pid1, pname1),(pid2, pname2), (pid3, pname3),(pid4, pname4), (pid5, pname5),(pid6, pname6), (pid7, pname7),(pid8, pname8)] = info
-    #return [(pid1, pname1, pid2, pname2), (pid3, pname3, pid4, pname4), (pid5, pname5, pid6, pname6), (pid7, pname7, pid8, pname8)] 
- 
+
 
