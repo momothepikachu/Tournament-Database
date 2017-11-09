@@ -3,42 +3,52 @@
 # tournament.py -- implementation of a Swiss-system tournament
 #
 
-import psycopg2
+import psycopg2, sys
 
 
-def connect():
+def connect(database_name):
     """Connect to the PostgreSQL database.  Returns a database connection."""
-    return psycopg2.connect("dbname=tournament")
+    try:
+        db = psycopg2.connect("dbname={}".format(database_name))
+        c = db.cursor()
+        return db, c
+    except psycopg2.Error as e:
+        print "Unable to connect to database"   
+        sys.exit(1)
+        # OR perhaps throw an error
+        #raise e (If you choose to raise an exception, it will need to be caught by the whoever called this function)
+    #return psycopg2.connect("dbname=tournament")
+
+
+def execute(query):
+    """Connect to the PostgreSQL database.  Returns a database connection."""
+    db, c = connect("tournament")   
+    c.execute(query)
+    db.commit()
+    db.close()
+
+
 
 
 def deleteMatches():
     """Remove all the match records from the database."""
-    conn = connect()
-    c = conn.cursor()
-    c.execute("update players set wins = 0, matches = 0;")
-    c.execute("delete from matches;")
-    conn.commit()
-    conn.close()
+    query = "delete from matches;"
+    execute(query)
 
 
 def deletePlayers():
     """Remove all the player records from the database."""
-    conn = connect()
-    c = conn.cursor()
-    c.execute("delete from players;")
-    c.execute("delete from matches;")
-    conn.commit()
-    conn.close()
+    query = "delete from players; delete from matches;"
+    execute(query)
 
 def countPlayers():
     """Returns the number of players currently registered."""
-    conn = connect()
-    c = conn.cursor()
+    db, c = connect("tournament")
     c.execute("select count(*) from players ;")
-    count = c.fetchone()
-    return count[0]
-    conn.commit()
-    conn.close()
+    results = c.fetchone()
+    db.close()
+    return results[0]
+    
     
 
 
@@ -51,12 +61,10 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
-    conn = connect()
-    c = conn.cursor()
+    db, c = connect("tournament")
     c.execute("insert into players (name) values (%s);",(name,))
-    #c.execute("insert into matches (id,wins,matches) values ((select id from players where name = (%s)),0,0)",(name,))
-    conn.commit()
-    conn.close()
+    db.commit()
+    db.close()
     
 
 def playerStandings():
@@ -72,12 +80,12 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    conn = connect()
-    c = conn.cursor()
-    c.execute("select id, name, wins, matches from players order by wins;")
-    standings = c.fetchall()
-    return standings
-    conn.close()
+    db, c = connect("tournament")
+    c.execute("select players.id, players.name, wins.wins, matchtotal.matches from players join wins on players.id=wins.id join matchtotal on players.id=matchtotal.id order by wins.wins desc;")
+    results = c.fetchall()
+    db.close()
+    return results
+    
 
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
@@ -86,13 +94,10 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
-    conn = connect()
-    c = conn.cursor()
+    db, c = connect("tournament")
     c.execute("insert into matches (winner,loser) values (%s,%s)",(winner,loser))
-    c.execute("update players set matches = matches +1, wins = wins + 1 where id = (%s);", (winner,))
-    c.execute("update players set matches = matches +1 where id = (%s);", (loser,))
-    conn.commit()
-    conn.close() 
+    db.commit()
+    db.close()
  
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
