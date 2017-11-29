@@ -18,7 +18,7 @@ I will develop a database schema to store the game matches between players. Use 
 ### <a name="Why-This-Project?"></a>Why This Project?
 Modern data-driven applications require developers that know how to store data and interact programmatically with that data. In this project, you’ll design a database based off of a provided specification and use case and then write code that makes use of that data.
 
-### <a name="Using-the-Vagrant-Virtual-Machine"></a>Using the Vagrant Virtual Machine
+### <a name="Using-the-Vagrant-Virtual-Machine"></a>Using the Vagrant Virtual Machine to Run This Project
 The Vagrant folder has PostgreSQL installed and configured, as well as the psql command line interface (CLI) , so that you don't have to install or configure them on your local machine (see P2- Tournament Results - Getting Started.pdf).
 
 ### <a name="Purposes-of-Each-File"></a>Purposes of Each File(in vagrant/tournament)
